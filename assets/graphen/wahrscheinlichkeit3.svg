@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 250" width="580" height="250">
+  <!-- Пунктирные линии сетки (от -4 до 6, шаг 45px, 0 находится на x=230) -->
+  <g stroke="#888888" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="4,4">
+    <line x1="50" y1="30" x2="50" y2="175" />
+    <line x1="95" y1="30" x2="95" y2="175" />
+    <line x1="140" y1="30" x2="140" y2="175" />
+    <line x1="185" y1="30" x2="185" y2="175" />
+    <line x1="275" y1="30" x2="275" y2="175" />
+    <line x1="320" y1="30" x2="320" y2="175" />
+    <line x1="365" y1="30" x2="365" y2="175" />
+    <line x1="410" y1="30" x2="410" y2="175" />
+    <line x1="455" y1="30" x2="455" y2="175" />
+    <line x1="500" y1="30" x2="500" y2="175" />
+  </g>
+
+  <!-- Оси X и Y -->
+  <g stroke="#222222" stroke-width="1.5">
+    <line x1="25" y1="175" x2="540" y2="175" />
+    <polygon points="540,175 531,171 531,179" fill="#222222" />
+    <line x1="230" y1="205" x2="230" y2="22" />
+    <polygon points="230,22 226,31 234,31" fill="#222222" />
+  </g>
+
+  <!-- Трапеция: (-4,0) -> (0,h) -> (2,h) -> (6,0) -->
+  <polyline points="50,175 230,95 320,95 500,175" fill="none" stroke="#c85a32" stroke-width="3" stroke-linejoin="round" />
+
+  <!-- Подписи осей и областей -->
+  <g fill="#222222" font-family="sans-serif" font-size="14">
+    <text x="240" y="32" font-weight="bold">f(x)</text>
+    <text x="535" y="163" font-weight="bold">x</text>
+    <text x="238" y="142">h</text>
+    <text x="118" y="65" text-anchor="middle">zu früh</text>
+    <text x="342" y="65" text-anchor="middle">zu spät</text>
+  </g>
+
+  <!-- Числа на оси X (-4 до 6) -->
+  <g fill="#222222" font-family="sans-serif" font-size="13" text-anchor="middle">
+    <text x="50" y="195">-4</text>
+    <text x="95" y="195">-3</text>
+    <text x="140" y="195">-2</text>
+    <text x="185" y="195">-1</text>
+    <text x="220" y="195">0</text>
+    <text x="275" y="195">1</text>
+    <text x="320" y="195">2</text>
+    <text x="365" y="195">3</text>
+    <text x="410" y="195">4</text>
+    <text x="455" y="195">5</text>
+    <text x="500" y="195">6</text>
+  </g>
+
+  <!-- Нижний ряд: время (13^56 - 14^06) -->
+  <g fill="#444444" font-family="sans-serif" font-size="12" text-anchor="middle">
+    <text x="50" y="225">13<tspan dy="-5" font-size="9">56</tspan></text>
+    <text x="95" y="225">13<tspan dy="-5" font-size="9">57</tspan></text>
+    <text x="140" y="225">13<tspan dy="-5" font-size="9">58</tspan></text>
+    <text x="185" y="225">13<tspan dy="-5" font-size="9">59</tspan></text>
+    <text x="230" y="225">14<tspan dy="-5" font-size="9">00</tspan></text>
+    <text x="275" y="225">14<tspan dy="-5" font-size="9">01</tspan></text>
+    <text x="320" y="225">14<tspan dy="-5" font-size="9">02</tspan></text>
+    <text x="365" y="225">14<tspan dy="-5" font-size="9">03</tspan></text>
+    <text x="410" y="225">14<tspan dy="-5" font-size="9">04</tspan></text>
+    <text x="455" y="225">14<tspan dy="-5" font-size="9">05</tspan></text>
+    <text x="500" y="225">14<tspan dy="-5" font-size="9">06</tspan></text>
+  </g>
+</svg>
