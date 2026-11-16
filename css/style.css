@@ -112,9 +112,9 @@ a {
 }
 #hero-image {
     width: auto;
-    max-height: 550px;
+    max-height: 450px;
     height: auto;
-    margin: 0 0 0 10%;
+    margin: 10% 0 0 10%;
 }
 
 .hero-content h4 {

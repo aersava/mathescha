@@ -24,6 +24,11 @@ async function loadPage() {
         if (topicSlug && typeof renderTopicTasks === 'function') {
             renderTopicTasks(topicSlug);
         }
+        if (pageToFetch === 'mini-test' && typeof renderMiniTest === 'function') {
+            renderMiniTest();
+        } else if (topicSlug && typeof renderTopicTasks === 'function') {
+            renderTopicTasks(topicSlug);
+        }
 
     } catch (error) {
         console.error(error);

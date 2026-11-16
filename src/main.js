@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Kater-Image und Sprechblase aktualisieren
 function UpdateBuildDate() {
-
     const katerPhrases = {
         frueh: ["ich brauche Monster Energie...", "Warum...", "Omg, ich will schlaffen", "Wer mag Mathe?"],
         spaeter: ["Guten Morgen!", "EPM wartet nicht", "let's go."],
@@ -72,6 +72,106 @@ function UpdateBuildDate() {
 
 document.addEventListener('DOMContentLoaded', UpdateBuildDate);
 
+//MINITEST und weiter Pruefungen starten
+function startTrial() {
+    window.location.href = '#mini-test';
+}
+
+async function renderMiniTest() {
+    const container = document.getElementById('tasks-container');
+
+    if (!container) return;
+
+    container.innerHTML = '<p>Lade Aufgaben aus der Datenbank...</p>';
+
+    try {
+        const { data: problems, error } = await db
+            .from('problems')
+            .select(`
+                *,
+                topics ( title )
+            `)
+            .eq('is_published', true);
+
+        if (error || !problems || problems.length === 0) {
+            container.innerHTML = '<p>Keine Aufgaben gefunden.</p>';
+            return;
+        }
+
+        const tasksByTopic = {};
+        problems.forEach(problem => {
+            if (!tasksByTopic[problem.topic_id]) {
+                tasksByTopic[problem.topic_id] = [];
+            }
+            tasksByTopic[problem.topic_id].push(problem);
+        });
+
+        // eine randome Aufgabe aus jedem Thema auswählen
+        const testTasks = [];
+        for (const topicId in tasksByTopic) {
+            const topicTasks = tasksByTopic[topicId];
+            const randomTask = topicTasks[Math.floor(Math.random() * topicTasks.length)];
+            testTasks.push(randomTask);
+        }
+
+        // rendere die ausgewählten Aufgaben
+        container.innerHTML = testTasks.map((p, index) => {
+            let answersContent = '<p>Keine Antworten verfügbar</p>';
+            if (p.answers && p.answers.length > 0) {
+                answersContent = `<p>${p.answers}</p>`;
+            }
+            
+            const topicTitle = p.topics ? p.topics.title : `Thema ${p.topic_id}`;
+
+            return `
+                <div class="task-card">
+                    <div class="task-meta">
+                        Aufgabe #${index + 1} • ${topicTitle} • Niveau: ${p.difficulty}
+                    </div>
+            
+                    <div class="task-text">
+                        ${p.task_text}
+                    </div>
+
+                    ${p.formula_hints ? `
+                        <div class="task-hint">
+                            <em>Hinweis: ${p.formula_hints}</em>
+                        </div>
+                    ` : ''}
+
+                    <details class="task-solution">
+                        <summary>Ergebnis anzeigen</summary>
+                        <div class="solution-content result-content">
+                            ${answersContent}
+                        </div>
+                    </details>
+
+                    <details class="task-solution">
+                        <summary>Musterlösung anzeigen</summary>
+                        <div class="solution-content">
+                            ${p.solution_steps ? `<p>${p.solution_steps.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>` : '<p>Keine Lösung hinterlegt</p>'}
+                        </div>
+                    </details>
+                </div>
+            `;
+        }).join('');
+
+        if (window.renderMathInElement) {
+            renderMathInElement(container, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false }
+                ],
+                throwOnError: false,
+                output: 'html'
+            });
+        }
+
+    } catch (e) {
+        console.error(e);
+        container.innerHTML = '<p>Fehler beim Laden des Mini-Tests.</p>';
+    }
+}
 
 //AUFGABEN RENDERN
 
