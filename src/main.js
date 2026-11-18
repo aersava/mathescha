@@ -270,3 +270,19 @@ async function renderTopicTasks(slug) {
     }
 }
 
+
+async function trackVisitor() {
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return; // Don't track on localhost
+    if (sessionStorage.getItem('visited')) return; // Already tracked in this session
+
+    const { error } = await db 
+        .from('page_views')
+        .insert({ path: window.location.pathname });
+
+    if (!error) {
+        sessionStorage.setItem('visited', 'true');
+    } else {
+        console.error('Ошибка записи визита:', error);
+    }
+}
+document.addEventListener('DOMContentLoaded', trackVisitor);
