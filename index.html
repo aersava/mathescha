@@ -13,22 +13,122 @@
     </head>
 
     <body>
+        <script>
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        </script>
+
+        <svg class="paw-rig top-paw-rig" id="top-paw" viewBox="0 0 120 220" aria-hidden="true">
+            <g class="paw-arm">
+                <path d="M44,0 L44,135 L76,135 L76,0 Z" fill="#161616" stroke="#000000" stroke-width="2.5"/>
+                <g class="paw-wrist">
+                    <path d="M44,125 
+                             C44,132 38,136 39,141 
+                             C40,144 42,145 39,148 
+                             C36,151 38,156 41,158 
+                             L40,166 
+                             C32,171 29,181 33,188 
+                             C36,193 41,193 44,192 
+                             C44,198 50,202 56,201 
+                             C58,200.5 60,199.5 60,199.5 
+                             C60,199.5 62,200.5 64,201 
+                             C70,202 76,198 76,192 
+                             C79,193 84,193 87,188 
+                             C91,181 88,171 80,166 
+                             L79,158 
+                             C82,156 84,151 81,148 
+                             C78,145 80,144 81,141 
+                             C82,136 76,132 76,125 Z" 
+                          fill="#161616" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M34,189 C33,193 36,194 39,192 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                    <path d="M48,200 C49,204 52,204 54,201 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                    <path d="M66,201 C68,204 71,204 72,200 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                    <path d="M81,192 C84,194 87,193 86,189 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                    <path d="M60,178 C55,178 52,172 48,168 C44,164 45,156 51,155 C55,154.5 58,157 60,158.5 C62,157 65,154.5 69,155 C75,156 76,164 72,168 C68,172 65,178 60,178 Z" fill="#d14d41"/>
+                    <ellipse cx="42" cy="178" rx="4.8" ry="6.8" fill="#d14d41" transform="rotate(-18 42 178)"/>
+                    <ellipse cx="53" cy="189" rx="5" ry="7.2" fill="#d14d41" transform="rotate(-6 53 189)"/>
+                    <ellipse cx="67" cy="189" rx="5" ry="7.2" fill="#d14d41" transform="rotate(6 67 189)"/>
+                    <ellipse cx="78" cy="178" rx="4.8" ry="6.8" fill="#d14d41" transform="rotate(18 78 178)"/>
+                </g>
+            </g>
+        </svg>
+
+        <svg class="paw-rig bottom-paw-rig" id="bottom-paw" viewBox="0 0 120 260" aria-hidden="true">
+            <g transform="translate(0, 260) scale(1, -1)">
+                <g class="paw-arm">
+                    <path d="M44,0 L44,175 L76,175 L76,0 Z" fill="#161616" stroke="#000000" stroke-width="2.5"/>
+                    <g class="paw-wrist">
+                        <path d="M44,165 
+                                 C44,172 38,176 39,181 
+                                 C40,184 42,185 39,188 
+                                 C36,191 38,196 41,198 
+                                 L40,206 
+                                 C32,211 29,221 33,228 
+                                 C36,233 41,233 44,232 
+                                 C44,238 50,242 56,241 
+                                 C58,240.5 60,239.5 60,239.5 
+                                 C60,239.5 62,240.5 64,241 
+                                 C70,242 76,238 76,232 
+                                 C79,233 84,233 87,228 
+                                 C91,221 88,211 80,206 
+                                 L79,198 
+                                 C82,196 84,191 81,188 
+                                 C78,185 80,184 81,181 
+                                 C82,176 76,172 76,165 Z" 
+                              fill="#161616" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+                        <path d="M34,229 C33,233 36,234 39,232 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                        <path d="M48,240 C49,244 52,244 54,241 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                        <path d="M66,241 C68,244 71,244 72,240 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                        <path d="M81,232 C84,234 87,233 86,229 Z" fill="#d14d41" stroke="#000000" stroke-width="1.8"/>
+                        <path d="M60,218 C55,218 52,212 48,208 C44,204 45,196 51,195 C55,194.5 58,197 60,198.5 C62,197 65,194.5 69,195 C75,196 76,204 72,208 C68,212 65,218 60,218 Z" fill="#d14d41"/>
+                        <ellipse cx="42" cy="218" rx="4.8" ry="6.8" fill="#d14d41" transform="rotate(-18 42 218)"/>
+                        <ellipse cx="53" cy="229" rx="5" ry="7.2" fill="#d14d41" transform="rotate(-6 53 229)"/>
+                        <ellipse cx="67" cy="229" rx="5" ry="7.2" fill="#d14d41" transform="rotate(6 67 229)"/>
+                        <ellipse cx="78" cy="218" rx="4.8" ry="6.8" fill="#d14d41" transform="rotate(18 78 218)"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+
         <nav class="navbar-top">
             <div class="navbar-left">
                 <span class="section-num">✦</span>
             </div>
-
+            
+            <!--Desktop-->
             <div class="navbar-center">
                 <a href="#home">home</a>
                 <a href="#exercises">aufgaben</a>
-                <a >prüfungen(schon bald)</a>
+                <a>prüfungen (schon bald)</a>
             </div>
 
             <div class="navbar-right">
                 <button class="nav-btn" id="theme-toggle">☾</button>
-                <!--button id="login-btn">login</button-->
+
+                <!--Mobil-->
+                <button class="burger-btn" id="burger-btn" aria-label="Menü">
+                    <span class="burger-line line-1"></span>
+                    <span class="burger-line line-2"></span>
+                    <span class="burger-line line-3"></span>
+                </button>
             </div>
         </nav>
+
+        <div class="mobile-menu-curtain" id="mobile-menu">
+            <div class="mobile-menu-links">
+                <a href="#home" class="mobile-nav-links">home</a>
+                <a href="#exercises" class="mobile-nav-links">aufgaben</a>
+                <a class="mobile-nav-links disabled-link">prüfungen (schon bald)</a>
+            </div>
+
+            <button class="close-curtain-btn" id="close-menu-btn" aria-label="Menü schließen">
+                <svg class="cross-icon" viewBox="0 0 24 24">
+                    <line x1="5" y1="5" x2="19" y2="19" />
+                    <line x1="19" y1="5" x2="5" y2="19" />
+                </svg>
+            </button>
+        </div>
 
         <main id="app"></main>
 

@@ -2,13 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
 
     if (themeToggleBtn) {
+        if (document.body.classList.contains('dark-theme')) {
+            themeToggleBtn.textContent = '☼';
+        }
+
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
 
             if (document.body.classList.contains('dark-theme')) {
                 themeToggleBtn.textContent = '☼';
+                localStorage.setItem('theme', 'dark');
             } else {
                 themeToggleBtn.textContent = '☾';
+                localStorage.setItem('theme', 'light');
             }
         });
     }
@@ -286,3 +292,98 @@ async function trackVisitor() {
     }
 }
 document.addEventListener('DOMContentLoaded', trackVisitor);
+
+//Mobile menü
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerBtn = document.getElementById('burger-btn');
+    const line3 = burgerBtn?.querySelector('.line-3');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const topPaw = document.getElementById('top-paw');
+    const bottomPaw = document.getElementById('bottom-paw');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links');
+
+    if (!burgerBtn || !line3 || !closeMenuBtn || !mobileMenu || !topPaw || !bottomPaw) return;
+    
+    let isMenuAnimating = false;
+
+    function alignPaws() {
+        if (window.innerWidth > 950) return;
+        const burgerRect = burgerBtn.getBoundingClientRect();
+        topPaw.style.left = `${burgerRect.left - 35}px`;
+        bottomPaw.style.left = `${window.innerWidth / 2 - 55}px`;
+    }
+
+    window.addEventListener('resize', alignPaws);
+    alignPaws();
+
+    function openMenu() {
+        if (isMenuAnimating || mobileMenu.classList.contains('is-open')) return;
+        isMenuAnimating = true;
+        alignPaws();
+
+        const bottomOfBurger = line3.getBoundingClientRect().bottom;
+        mobileMenu.style.setProperty('--menu-start-y', `${bottomOfBurger}px`);
+
+        burgerBtn.classList.remove('is-restored', 'is-restored-fast');
+        mobileMenu.classList.remove('is-closing', 'is-closing-fast');
+        bottomPaw.classList.remove('is-striking');
+
+        topPaw.classList.add('is-striking');
+        burgerBtn.classList.add('is-smashed');
+        mobileMenu.classList.add('is-open');
+
+        setTimeout(() => {
+            topPaw.classList.remove('is-striking');
+            isMenuAnimating = false;
+        }, 900);
+    }
+
+    function closeMenu(withSlap = true) {
+        if (isMenuAnimating || !mobileMenu.classList.contains('is-open')) return;
+        isMenuAnimating = true;
+
+        if (withSlap) {
+            const closeRect = closeMenuBtn.getBoundingClientRect();
+            const menuRect = mobileMenu.getBoundingClientRect();
+            const bottomOffset = Math.max(0, menuRect.bottom - closeRect.bottom);
+            
+            mobileMenu.style.clipPath = `inset(0 0 ${bottomOffset}px 0)`;
+            mobileMenu.offsetHeight;
+            mobileMenu.style.clipPath = '';
+
+            mobileMenu.classList.remove('is-open');
+            bottomPaw.classList.add('is-striking');
+            mobileMenu.classList.add('is-closing');
+            burgerBtn.classList.remove('is-smashed');
+            burgerBtn.classList.add('is-restored');
+
+            setTimeout(() => {
+                mobileMenu.classList.remove('is-closing');
+                bottomPaw.classList.remove('is-striking');
+                isMenuAnimating = false;
+            }, 950);
+        } else {
+            mobileMenu.classList.remove('is-open');
+            mobileMenu.classList.add('is-closing-fast');
+            burgerBtn.classList.remove('is-smashed');
+            burgerBtn.classList.add('is-restored-fast');
+
+            setTimeout(() => {
+                mobileMenu.classList.remove('is-closing-fast');
+                isMenuAnimating = false;
+            }, 550);
+        }
+    }
+
+    burgerBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', () => closeMenu(true));
+
+    mobileLinks.forEach(link => {
+        if (!link.classList.contains('disabled-link')) {
+            link.addEventListener('click', () => closeMenu(false));
+        }
+    });
+});
+
+        
